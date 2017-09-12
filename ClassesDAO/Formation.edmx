@@ -14,14 +14,33 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Formation" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="FormationContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="StagiairesSet" EntityType="Formation.Stagiaires" />
-          <EntitySet Name="StagiaireCIFSet" EntityType="Formation.StagiaireCIF" />
-          <EntitySet Name="StagiaireDESet" EntityType="Formation.StagiaireDE" />
           <EntitySet Name="SectionsSet" EntityType="Formation.Sections" />
+          <AssociationSet Name="SectionsStagiaires" Association="Formation.SectionsStagiaires">
+            <End Role="Sections" EntitySet="SectionsSet" />
+            <End Role="Stagiaires" EntitySet="StagiairesSet" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Stagiaires" />
-        <EntityType Name="StagiaireCIF" />
-        <EntityType Name="StagiaireDE">
-          </EntityType>
+        <EntityType Name="Stagiaires" >
+          <Key>
+            <PropertyRef Name="NumOsia" />
+          </Key>
+          <Property Name="NumOsia" Type="Int32" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
+          <Property Name="NomStagiaire" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+          <Property Name="PrenomStagiaire" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+          <Property Name="rueStagiaire" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+          <Property Name="VilleStagiaire" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+          <Property Name="CodePostalStagiaire" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" FixedLength="true" MaxLength="5" />
+          <Property Name="NbreNote" Type="Int32" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
+          <Property Name="PointsNotes" Type="Double" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
+          <NavigationProperty Name="Sections" Relationship="Formation.SectionsStagiaires" FromRole="Stagiaires" ToRole="Sections" />
+        </EntityType>
+        <EntityType Name="StagiaireCIF" BaseType="Formation.Stagiaires" >
+          <Property Name="TypeCIF" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+          <Property Name="Fongecif" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="StagiaireDE" BaseType="Formation.Stagiaires">
+          <Property Name="RemuAfpa" Type="Boolean" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
+        </EntityType>
         <EntityType Name="Sections">
           <Key>
             <PropertyRef Name="IdSection" />
@@ -31,7 +50,12 @@
           <Property Name="CodeSection" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
           <Property Name="DateDebut" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
           <Property Name="DateFin" Type="String" Nullable="false" cg:GetterAccess="Internal" cg:SetterAccess="Internal" />
+          <NavigationProperty Name="Stagiaires" Relationship="Formation.SectionsStagiaires" FromRole="Sections" ToRole="Stagiaires" />
         </EntityType>
+        <Association Name="SectionsStagiaires">
+          <End Type="Formation.Sections" Role="Sections" Multiplicity="1" />
+          <End Type="Formation.Stagiaires" Role="Stagiaires" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
