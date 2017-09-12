@@ -19,9 +19,11 @@ namespace ClassesDAO
         {
             // instancier le dbContext au besoin 
             if (DonneesDAO.DbContextFormation == null) DonneesDAO.DbContextFormation = new FormationContainer();
-
+            Console.WriteLine("dfgsnsg"+laSection.IdSection);
             // requête Linq pour lire la BDD (génère les requ. SQL) 
-            var query = from a in DonneesDAO.DbContextFormation.StagiairesSet where a.Sections.IdSection == laSection.IdSection select a;
+            var query = from a in DonneesDAO.DbContextFormation.StagiairesSet
+                        where a.Sections.IdSection == laSection.IdSection
+                        select a;
 
             // ref d'objet générique (pour la collection)
             MStagiaire leStagiaire;

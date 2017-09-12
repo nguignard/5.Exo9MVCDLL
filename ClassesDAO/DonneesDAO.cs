@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassesDAO
 {
-    internal static  class DonneesDAO
+    public static class DonneesDAO
     {
         /// <summary> /// dbContext Entity Framework /// </summary>
         public static FormationContainer DbContextFormation;

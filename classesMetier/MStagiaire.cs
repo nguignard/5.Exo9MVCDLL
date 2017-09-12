@@ -233,7 +233,7 @@ namespace Exo9
         /// <param name="undemandeur">nom du type de la classe demandeur</param>
         public void SetPoints(Double desPoints, Int32 desNotes, String  undemandeur)
         {
-            if (undemandeur == "Exo9.MStagiaireDAOStatic")
+            if (undemandeur == "ClassesDAO.MStagiaireDAOEFStatic")
             {
                 this.pointsNotes = desPoints;
                 this.nbreNotes = desNotes;
