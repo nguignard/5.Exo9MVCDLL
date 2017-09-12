@@ -4,11 +4,105 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Formation.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="FormationTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Formation.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FormationStoreContainer">
+    <EntitySet Name="StagiairesSet" EntityType="Formation.Store.StagiairesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SectionsSet" EntityType="Formation.Store.SectionsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StagiairesSet_StagiaireCIF" EntityType="Formation.Store.StagiairesSet_StagiaireCIF" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StagiairesSet_StagiaireDE" EntityType="Formation.Store.StagiairesSet_StagiaireDE" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SectionsStagiaires" Association="Formation.Store.SectionsStagiaires">
+      <End Role="Sections" EntitySet="SectionsSet" />
+      <End Role="Stagiaires" EntitySet="StagiairesSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StagiaireCIF_inherits_Stagiaires" Association="Formation.Store.FK_StagiaireCIF_inherits_Stagiaires">
+      <End Role="Stagiaires" EntitySet="StagiairesSet" />
+      <End Role="StagiaireCIF" EntitySet="StagiairesSet_StagiaireCIF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StagiaireDE_inherits_Stagiaires" Association="Formation.Store.FK_StagiaireDE_inherits_Stagiaires">
+      <End Role="Stagiaires" EntitySet="StagiairesSet" />
+      <End Role="StagiaireDE" EntitySet="StagiairesSet_StagiaireDE" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="StagiairesSet">
+    <Key>
+      <PropertyRef Name="NumOsia" />
+    </Key>
+    <Property Name="NumOsia" Type="int" Nullable="false" />
+    <Property Name="NomStagiaire" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="PrenomStagiaire" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="rueStagiaire" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="VilleStagiaire" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="CodePostalStagiaire" Type="nchar" Nullable="false" MaxLength="5" />
+    <Property Name="NbreNote" Type="int" Nullable="true" />
+    <Property Name="PointsNotes" Type="float" Nullable="false" />
+    <Property Name="Sections_IdSection" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SectionsSet">
+    <Key>
+      <PropertyRef Name="IdSection" />
+    </Key>
+    <Property Name="IdSection" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomSection" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CodeSection" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateDebut" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateFin" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StagiairesSet_StagiaireCIF">
+    <Key>
+      <PropertyRef Name="NumOsia" />
+    </Key>
+    <Property Name="TypeCIF" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Fongecif" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="NumOsia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StagiairesSet_StagiaireDE">
+    <Key>
+      <PropertyRef Name="NumOsia" />
+    </Key>
+    <Property Name="RemuAfpa" Type="bit" Nullable="false" />
+    <Property Name="NumOsia" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SectionsStagiaires">
+    <End Role="Sections" Type="Formation.Store.SectionsSet" Multiplicity="1" />
+    <End Role="Stagiaires" Type="Formation.Store.StagiairesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="IdSection" />
+      </Principal>
+      <Dependent Role="Stagiaires">
+        <PropertyRef Name="Sections_IdSection" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StagiaireCIF_inherits_Stagiaires">
+    <End Role="Stagiaires" Type="Formation.Store.StagiairesSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StagiaireCIF" Type="Formation.Store.StagiairesSet_StagiaireCIF" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Stagiaires">
+        <PropertyRef Name="NumOsia" />
+      </Principal>
+      <Dependent Role="StagiaireCIF">
+        <PropertyRef Name="NumOsia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StagiaireDE_inherits_Stagiaires">
+    <End Role="Stagiaires" Type="Formation.Store.StagiairesSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StagiaireDE" Type="Formation.Store.StagiairesSet_StagiaireDE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Stagiaires">
+        <PropertyRef Name="NumOsia" />
+      </Principal>
+      <Dependent Role="StagiaireDE">
+        <PropertyRef Name="NumOsia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Formation" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -60,13 +154,56 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Formation" />
-        <Alias Key="Target" Value="Formation.Store" />
-        <EntityContainerMapping CdmEntityContainer="FormationContainer" StorageEntityContainer="FormationTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FormationStoreContainer" CdmEntityContainer="FormationContainer">
+    <EntitySetMapping Name="StagiairesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Formation.Stagiaires)">
+        <MappingFragment StoreEntitySet="StagiairesSet">
+          <ScalarProperty Name="NumOsia" ColumnName="NumOsia" />
+          <ScalarProperty Name="NomStagiaire" ColumnName="NomStagiaire" />
+          <ScalarProperty Name="PrenomStagiaire" ColumnName="PrenomStagiaire" />
+          <ScalarProperty Name="rueStagiaire" ColumnName="rueStagiaire" />
+          <ScalarProperty Name="VilleStagiaire" ColumnName="VilleStagiaire" />
+          <ScalarProperty Name="CodePostalStagiaire" ColumnName="CodePostalStagiaire" />
+          <ScalarProperty Name="NbreNote" ColumnName="NbreNote" />
+          <ScalarProperty Name="PointsNotes" ColumnName="PointsNotes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Formation.StagiaireCIF)">
+        <MappingFragment StoreEntitySet="StagiairesSet_StagiaireCIF">
+          <ScalarProperty Name="NumOsia" ColumnName="NumOsia" />
+          <ScalarProperty Name="TypeCIF" ColumnName="TypeCIF" />
+          <ScalarProperty Name="Fongecif" ColumnName="Fongecif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Formation.StagiaireDE)">
+        <MappingFragment StoreEntitySet="StagiairesSet_StagiaireDE">
+          <ScalarProperty Name="NumOsia" ColumnName="NumOsia" />
+          <ScalarProperty Name="RemuAfpa" ColumnName="RemuAfpa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SectionsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Formation.Sections)">
+        <MappingFragment StoreEntitySet="SectionsSet">
+          <ScalarProperty Name="IdSection" ColumnName="IdSection" />
+          <ScalarProperty Name="NomSection" ColumnName="NomSection" />
+          <ScalarProperty Name="CodeSection" ColumnName="CodeSection" />
+          <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+          <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SectionsStagiaires" TypeName="Formation.SectionsStagiaires" StoreEntitySet="StagiairesSet">
+      <EndProperty Name="Sections">
+        <ScalarProperty Name="IdSection" ColumnName="Sections_IdSection" />
+      </EndProperty>
+      <EndProperty Name="Stagiaires">
+        <ScalarProperty Name="NumOsia" ColumnName="NumOsia" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -80,6 +217,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
