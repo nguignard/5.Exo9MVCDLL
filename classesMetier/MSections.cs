@@ -10,7 +10,7 @@ namespace Exo9
         /// <summary>
         /// collection des objets MSection
         /// </summary>
-        private SortedDictionary<String, MSection> lesSections;
+        private SortedDictionary<int, MSection> lesSections;
 
         /// <summary>
         /// DataTable à 2 colonnes pour restituer la liste des sections
@@ -24,7 +24,7 @@ namespace Exo9
         public MSections()
         {
             // instancier la collection 
-            lesSections = new SortedDictionary<String, MSection>();
+            lesSections = new SortedDictionary<int, MSection>();
             
             // prépare la DataTable pour restituer la liste des sections
             dtSections = new DataTable();
@@ -41,7 +41,7 @@ namespace Exo9
         /// <param name="uneSection">la référence de la section à ajouter</param>
         public void Ajouter(MSection uneSection)
         {
-            this.lesSections.Add(uneSection.CodeSection, uneSection); // à sécuriser...
+            this.lesSections.Add(uneSection.IdSection, uneSection); // à sécuriser...
         }
 
 
@@ -52,7 +52,7 @@ namespace Exo9
         /// <param name="uneSection">la référence de la section à supprimer</param>
         public void Supprimer(MSection uneSection)
         {
-            this.lesSections.Remove(uneSection.CodeSection); // à sécuriser...
+            this.lesSections.Remove(uneSection.IdSection); // à sécuriser...
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Exo9
         /// </summary>
         /// <param name="unCodeSection">la clé (= code section) de la section à supprimer</param>
         /// <exception cref="Exception">Si code section reçu non trouvé en collection</exception>
-        public void Supprimer(String unCodeSection)
+        public void Supprimer(int unCodeSection)
         {
             // suppression sécurisée
             if (this.lesSections.ContainsKey(unCodeSection))
@@ -84,7 +84,7 @@ namespace Exo9
             // dans la collection pour ce code Section
             
             //modifier la référence de section stockée dans la collection            
-            this.lesSections[uneSection.CodeSection] = uneSection; // à sécuriser...
+            this.lesSections[uneSection.IdSection] = uneSection; // à sécuriser...
 
         }
 
@@ -95,7 +95,7 @@ namespace Exo9
         /// <param name="unCodeSection">le code section (=la clé) de la section à rechercher</param>
         /// <exception cref="Exception">Si code section reçu non trouvé en collection</exception>
         /// <returns>la référence à la section</returns>
-        public MSection RestituerSection(String unCodeSection)
+        public MSection RestituerSection(int unCodeSection)
         {
             MSection laSection;
             laSection = this.lesSections[unCodeSection] ;

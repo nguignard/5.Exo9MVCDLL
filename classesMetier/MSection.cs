@@ -12,6 +12,9 @@ namespace Exo9
     public class MSection
     {
 
+        private int idSection;
+
+
         /// <summary>
         /// code de la section = sa clé 
         /// ==> en lecture seule et initialisé dans le constructeur
@@ -80,6 +83,20 @@ namespace Exo9
                 this.finFormation = value;
             }
         }
+
+        public int IdSection
+        {
+            get
+            {
+                return idSection;
+            }
+
+            set
+            {
+                idSection = value;
+            }
+        }
+
         /// <summary>
         /// collection des stagiaires de cette section 
         /// (en lecture seule) sous forme de liste triée
@@ -99,10 +116,10 @@ namespace Exo9
         /// constructeur : attend le code de la section
         /// </summary>
         /// <param name="leCode"></param>
-        public  MSection(String leCode, String leNom)
+        public  MSection(int id, String leNom)
         {
             // initialise le nom de la section
-            this.leCodeSection = leCode;
+            this.IdSection = id;
             this.NomSection = leNom.ToUpper();
             // instancie une liste vide pour les stagiaires
             lesStagiaires = new SortedDictionary<Int32, MStagiaire>();
