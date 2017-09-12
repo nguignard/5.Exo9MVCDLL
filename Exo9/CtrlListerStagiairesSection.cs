@@ -1,3 +1,4 @@
+using ClassesDAO;
 using System;
 using System.Collections;
 using System.Text;
@@ -27,8 +28,9 @@ namespace Exo9
         {
             // pour commencer on ne travaille qu'avec la section CDI
             // chargement en DataSet des données de la section CDI
-            this.init();
-            
+            //this.init();
+            this.initCDI();
+
             // instancier le form initial
             this.leForm = new frmExo9(this.laSection);
             // implémenter l'événement bouton ajouter clic
@@ -44,6 +46,22 @@ namespace Exo9
             this.leForm.Show();
 
 
+        }
+
+        private void initCDI()
+        {
+
+            // initialisation de la collection de sections
+            Donnees.Sections = new MSections();
+            // pour commencer, une seule section référencée "en dur" 
+            // instancie la section 
+            this.laSection = new MSection(1, "Concepteur Développeur Informatique");
+
+            // l'ajoute dans la collection des sections gérée par la classe de collection 
+            Donnees.Sections.Ajouter(this.laSection);
+
+            // chargement et instanciation des données Stagiaires de cette section depuis la BDD 
+            MStagiaireDAOEFStatic.InstancieStagiairesSection(this.laSection);
         }
 
         /// <summary>
@@ -132,21 +150,21 @@ namespace Exo9
         /// <summary>
         /// initialisation section CDI et chargement des stagiaires correcpondants
         /// </summary>
-        private void init()
-        {
-            // initialisation de la collection de sections
-            Donnees.Sections = new MSections();
-            // pour commencer, une seule section référencée "en dur" dans ce programme
-            // instancie la section
-            this.laSection = new MSection("CDI", "Concepteur Développeur Informatique 2011");
-            // l'ajoute dans la collection des sections gérée par la classe de collection
-            Donnees.Sections.Ajouter(this.laSection);
-            // ajoute en dur un stagiaire à cette section
-            MStagiaire unStagiaire;
-            unStagiaire = new MStagiaireDE(11111, "DUPONT", "Albert", "12 rue des Fleurs", "NICE", "06300", false);
-            this.laSection.Ajouter(unStagiaire);
+        //private void init()
+        //{
+        //    // initialisation de la collection de sections
+        //    Donnees.Sections = new MSections();
+        //    // pour commencer, une seule section référencée "en dur" dans ce programme
+        //    // instancie la section
+        //    this.laSection = new MSection("CDI", "Concepteur Développeur Informatique 2011");
+        //    // l'ajoute dans la collection des sections gérée par la classe de collection
+        //    Donnees.Sections.Ajouter(this.laSection);
+        //    // ajoute en dur un stagiaire à cette section
+        //    MStagiaire unStagiaire;
+        //    unStagiaire = new MStagiaireDE(11111, "DUPONT", "Albert", "12 rue des Fleurs", "NICE", "06300", false);
+        //    this.laSection.Ajouter(unStagiaire);
             
-        }
+        //}
 
 
 

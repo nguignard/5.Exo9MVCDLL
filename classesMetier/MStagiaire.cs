@@ -243,7 +243,8 @@ namespace Exo9
                 throw new Exception("Violation d'accès aux notes Stagiaires");
             }
         }
+
+
+
     }
-
-
 }

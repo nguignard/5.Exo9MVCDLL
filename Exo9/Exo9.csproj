@@ -133,6 +133,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassesDAO\ClassesDAO.csproj">
+      <Project>{E7E3B9BD-236E-4D10-B241-474579D59218}</Project>
+      <Name>ClassesDAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\classesMetier\classesMetier.csproj">
       <Project>{E99DAEC8-8E5E-4CFB-A730-FCC6CD8CD849}</Project>
       <Name>classesMetier</Name>
