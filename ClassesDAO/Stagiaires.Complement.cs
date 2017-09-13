@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exo9;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,27 @@ namespace ClassesDAO
 
         public Stagiaires()
         {
-
         }
 
-        public Stagiaires(int unNumOsia, String unNom, String unPrenom, String uneRue, String uneVille, String unCodePostal, int? unNbreNotes, Decimal? unPointsNotes, Sections unStage)
-        { this.NumOsia = unNumOsia; this.NomStagiaire = unNom; this.PrenomStagiaire = unPrenom; this.rueStagiaire = uneRue; this.VilleStagiaire = uneVille; this.CodePostalStagiaire = unCodePostal; this.NbreNotes = unNbreNotes; this.PointsNotes = unPointsNotes; this.Sections = unStage; }
+
+        public Stagiaires(int unNumOsia, String unNom, String unPrenom, String uneRue, String uneVille, String unCodePostal,
+            int? unNbreNotes, Decimal? unPointsNotes, Sections unStage)
+
+        { this.NumOsia = unNumOsia;
+            this.NomStagiaire = unNom;
+            this.PrenomStagiaire = unPrenom;
+            this.rueStagiaire = uneRue;
+            this.VilleStagiaire = uneVille;
+            this.CodePostalStagiaire = unCodePostal;
+            this.NbreNote = unNbreNotes;
+            this.PointsNotes = (Double)unPointsNotes;
+            this.Sections = unStage;
+        }
+
+        public Stagiaires(MStagiaire unStagiaire, Sections unStage)
+        {
+           
+        }
 
 		
 

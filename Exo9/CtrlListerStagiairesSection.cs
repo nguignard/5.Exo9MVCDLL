@@ -123,54 +123,69 @@ namespace Exo9
         {
             // instancier un ctrl form de saisie de stagiaire pour afficher le form en modal
             CtrlNouveauStagiaire ctrlNouveau = new CtrlNouveauStagiaire(this.laSection);
-            
+
             // si on sort de la saisie par OK
             if (ctrlNouveau.Resultat == DialogResult.OK)
             {
+                // ajout à la collection des MStagiaire s de cette section
                 try
                 {
-                    // ajouter la référence de l'objet MStagiaire créé par le ctrleur dans la collection des stagiaires de la section
+                    // ajouter la référence de l'objet MStagiaire créé par le
+                    // ctrleur dans la collection des stagiaires de la section
                     this.laSection.Ajouter(ctrlNouveau.LeStagiaire);
 
+                    // mettre à jour la BDD 
+                    try
+                    {
+                        // insérer la ligne correspondante dans le DataTable
+                        // du DataSet et met à jour la BDD
+                        MStagiaireDAOEFStatic.InsereStagiaire(ctrlNouveau.LeStagiaire, this.laSection.CodeSection);
 
-                    // mettre à jour la BDD // instancier l'Entity correspondante et l'ajouter au dbSet // et mettre à jour la BDD à l'aide du dbcontext
-                    MStagiaireDAOEFStatic.InsererStagiaire(ctrlNouveau.LeStagiaire, this.laSection);
+                    } // gestion erreurs en MAJ BDD
 
-
+                    catch (Exception ex)
+                    {
+                        // afficher l'erreur 
+                        this.leForm.LeveErreur(ex);
+                        // supprimer le MStagiaire de la collection 
+                        this.laSection.Supprimer(ctrlNouveau.LeStagiaire);
+                        // défaire ce qui a été éventuellement fait en BDD 
+                        MStagiaireDAOEFStatic.SupprimeStagiaire(ctrlNouveau.LeStagiaire.NumOsia);
+                    }
                 }
-                // gestion des erreurs en MAJ de la collection des MStagiaire de la section
+                // gestion erreurs en MAJ collection des MStagiaires de la section
                 catch (Exception ex)
                 {
+                    // afficher l'erreur 
                     this.leForm.LeveErreur(ex);
                 }
-                finally // dans tous les cas, erreur ou non
+                //dans tous les cas, erreur ou non,
+                finally
                 {
-                    // régénèrer l'affichage du dataGridView 
                     this.leForm.AfficheStagiaires(this.laSection);
                 }
             }
+
+            /// <summary>
+            /// initialisation section CDI et chargement des stagiaires correcpondants
+            /// </summary>
+            //private void init()
+            //{
+            //    // initialisation de la collection de sections
+            //    Donnees.Sections = new MSections();
+            //    // pour commencer, une seule section référencée "en dur" dans ce programme
+            //    // instancie la section
+            //    this.laSection = new MSection("CDI", "Concepteur Développeur Informatique 2011");
+            //    // l'ajoute dans la collection des sections gérée par la classe de collection
+            //    Donnees.Sections.Ajouter(this.laSection);
+            //    // ajoute en dur un stagiaire à cette section
+            //    MStagiaire unStagiaire;
+            //    unStagiaire = new MStagiaireDE(11111, "DUPONT", "Albert", "12 rue des Fleurs", "NICE", "06300", false);
+            //    this.laSection.Ajouter(unStagiaire);
+
+            //}
+
         }
-
-        /// <summary>
-        /// initialisation section CDI et chargement des stagiaires correcpondants
-        /// </summary>
-        //private void init()
-        //{
-        //    // initialisation de la collection de sections
-        //    Donnees.Sections = new MSections();
-        //    // pour commencer, une seule section référencée "en dur" dans ce programme
-        //    // instancie la section
-        //    this.laSection = new MSection("CDI", "Concepteur Développeur Informatique 2011");
-        //    // l'ajoute dans la collection des sections gérée par la classe de collection
-        //    Donnees.Sections.Ajouter(this.laSection);
-        //    // ajoute en dur un stagiaire à cette section
-        //    MStagiaire unStagiaire;
-        //    unStagiaire = new MStagiaireDE(11111, "DUPONT", "Albert", "12 rue des Fleurs", "NICE", "06300", false);
-        //    this.laSection.Ajouter(unStagiaire);
-            
-        //}
-
-
 
     }
 }

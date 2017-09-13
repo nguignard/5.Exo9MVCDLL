@@ -14,10 +14,19 @@ namespace ClassesDAO
         {
         }
 
-        public StagiaireCIF(int unNumOsia, String unNom, String unPrenom, String uneRue, String uneVille, String unCodePostal, int? unNbreNotes, Decimal? unPointsNotes, Sections unStage, String unFongecif, String unTypeCIF) :
+        public StagiaireCIF(int unNumOsia, String unNom, String unPrenom, String uneRue, String uneVille, String unCodePostal, 
+            int? unNbreNotes, Decimal? unPointsNotes,
+            Sections unStage, String unFongecif, String unTypeCIF) :
             base(unNumOsia, unNom, unPrenom, uneRue, uneVille, unCodePostal, unNbreNotes, unPointsNotes, unStage)
         { this.Fongecif = unFongecif; this.TypeCIF = unTypeCIF; }
 
-       
+
+
+        public StagiaireCIF(MStagiaire unStagiaire, Sections unStage, String unFongecif, String unTypeCIF):base( unStagiaire,  unStage)
+        {
+
+
+
+        }
     }
 }

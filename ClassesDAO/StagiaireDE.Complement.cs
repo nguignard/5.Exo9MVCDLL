@@ -11,16 +11,14 @@ namespace ClassesDAO
 
         public StagiaireDE()
         {
-                
         }
 
         public StagiaireDE(Int32 unNumosia, String unNom, String unPrenom, String uneRue, String uneVille, String UnCodePostal,
-            Boolean unRemuAfpa)
+          int? note, Decimal? unPointsNotes, Sections unStage, Boolean unRemuAfpa):base()
         {
             this.RemuAfpa = unRemuAfpa;
         }
-    
 
-
+       
     }
 }

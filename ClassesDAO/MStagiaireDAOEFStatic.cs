@@ -73,12 +73,16 @@ namespace ClassesDAO
 
             if (unStagiaire is MStagiaireCIF)
             {
-                unStagiaireEF = new StagiaireCIF(unStagiaire.NumOsia, unStagiaire , laSection, 
+                unStagiaireEF = new StagiaireCIF(unStagiaire.NumOsia, unStagiaire.Nom, unStagiaire.Prenom,
+                    unStagiaire.Rue, unStagiaire.Ville, unStagiaire.CodePostal,
+                    unStagiaire.NbreNotes,(Decimal?)unStagiaire.PointsNotes,laSection,
                     ((MStagiaireCIF)unStagiaire).Fongecif, ((MStagiaireCIF)unStagiaire).TypeCif);
             }
             else
             { // cas d'un DE 
-                unStagiaireEF = new StagiaireDE(unStagiaire.NumOsia, unStagiaire, laSection, 
+                unStagiaireEF = new StagiaireDE(
+                    unStagiaire.NumOsia, unStagiaire.Nom, unStagiaire.Prenom, unStagiaire.Rue, unStagiaire.Ville, unStagiaire.CodePostal,
+                    unStagiaire.NbreNotes, (Decimal?)unStagiaire.PointsNotes, laSection,
                     ((MStagiaireDE)unStagiaire).RemuAfpa);
             }
         
@@ -97,7 +101,14 @@ namespace ClassesDAO
 	}
         }
 
+        public static void InsereStagiaire(MStagiaire leStagiaire, string codeSection)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public static void SupprimeStagiaire(int numOsia)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
