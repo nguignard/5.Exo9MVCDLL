@@ -48,12 +48,16 @@ namespace Exo9
 
         private void initCDI()
         {
-
             // initialisation de la collection de sections
             Donnees.Sections = new MSections();
             // pour commencer, une seule section référencée "en dur" 
             // instancie la section 
-            this.laSection = new MSection(1, "Concepteur Développeur Informatique");
+            //this.laSection = new MSection(1, "Concepteur Développeur Informatique");
+            // chargement section depuis la BDD 
+            this.laSection = MSectionDAOEFStatic.RestitueSection(1);
+            Donnees.Sections.Ajouter(this.laSection);
+
+
 
             // l'ajoute dans la collection des sections gérée par la classe de collection 
             Donnees.Sections.Ajouter(this.laSection);
