@@ -15,10 +15,7 @@ namespace ClassesDAO
     public partial class Sections
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sections()
-        {
-            this.Stagiaires = new HashSet<Stagiaires>();
-        }
+        
     
         internal int IdSection { get; set; }
         internal string NomSection { get; set; }

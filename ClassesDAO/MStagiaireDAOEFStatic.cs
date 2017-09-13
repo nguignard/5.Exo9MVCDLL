@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClassesDAO
 {
-
+    
     /// <summary> /// classe accès aux données - BDD : Formations, table : Stagiaires /// </summary>
     public static class MStagiaireDAOEFStatic
     {
@@ -57,6 +57,45 @@ namespace ClassesDAO
             }
         }
 
+        public static void InsererStagiaire(MStagiaire unStagiaire, MSection uneSection)
+        {
+            // instancier le dbContext au besoin
+            if(DonneesDAO.DbContextFormation == null)
+            {
+                DonneesDAO.DbContextFormation = new FormationContainer();
+            }
+            // rechercher l'Entity Section
+
+            Sections laSection = DonneesDAO.DbContextFormation.SectionsSet.Find(uneSection.CodeSection);
+
+            // instancie un Entity et le renseigne à partir du MStagiaire reçu
+            Stagiaires unStagiaireEF = null; // initialiser pour le compilateur
+
+            if (unStagiaire is MStagiaireCIF)
+            {
+                unStagiaireEF = new StagiaireCIF(unStagiaire.NumOsia, unStagiaire , laSection, 
+                    ((MStagiaireCIF)unStagiaire).Fongecif, ((MStagiaireCIF)unStagiaire).TypeCif);
+            }
+            else
+            { // cas d'un DE 
+                unStagiaireEF = new StagiaireDE(unStagiaire.NumOsia, unStagiaire, laSection, 
+                    ((MStagiaireDE)unStagiaire).RemuAfpa);
+            }
+        
+
+        try 
+	{	        
+		// ajoute l'Entity au dbSet du dbContext 
+        DonneesDAO.DbContextFormation.StagiairesSet.Add(unStagiaireEF); 
+        // déclenche la MAJ sur BDD 
+        DonneesDAO.DbContextFormation.SaveChanges();
+	}
+	catch (Exception ex)
+	{
+
+		throw ex;
+	}
+        }
 
 
 

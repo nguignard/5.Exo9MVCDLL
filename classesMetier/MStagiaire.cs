@@ -21,6 +21,12 @@ namespace Exo9
 
         //}
 
+
+        public MStagiaire()
+        {
+
+        }
+
         /// <summary>
         /// constructeur d'initialisation
         /// </summary>
@@ -41,8 +47,10 @@ namespace Exo9
             this.CodePostal = UnCodePostal;
             this.nbreNotes = 0;
             this.pointsNotes = 0;
-
         }
+
+        
+        
         /// <summary>
         /// numéro du stagiaire
         /// </summary>

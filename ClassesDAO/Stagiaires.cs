@@ -22,7 +22,9 @@ namespace ClassesDAO
         internal string CodePostalStagiaire { get; set; }
         internal Nullable<int> NbreNote { get; set; }
         internal double PointsNotes { get; set; }
-    
+       
+
+
         public virtual Sections Sections { get; set; }
     }
 }

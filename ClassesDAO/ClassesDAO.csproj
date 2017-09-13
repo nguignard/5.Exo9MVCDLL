@@ -72,6 +72,9 @@
     <Compile Include="Sections.cs">
       <DependentUpon>Formation.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sections.Complement.cs" />
+    <Compile Include="StagiaireDE.Complement.cs" />
+    <Compile Include="StagiaireCIF.Complement.cs" />
     <Compile Include="StagiaireCIF.cs">
       <DependentUpon>Formation.tt</DependentUpon>
     </Compile>
@@ -94,6 +97,7 @@
       <DependentUpon>Formation.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <Compile Include="Stagiaires.Complement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Formation.Context.tt">

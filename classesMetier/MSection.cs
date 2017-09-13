@@ -111,7 +111,12 @@ namespace Exo9
         private DataTable dtStagiaires;
 
 
-        
+
+        public MSection()
+        {
+
+        }
+
         /// <summary>
         /// constructeur : attend le code de la section
         /// </summary>

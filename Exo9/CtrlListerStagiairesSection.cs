@@ -44,8 +44,6 @@ namespace Exo9
             // afficher le form
             this.leForm.MdiParent = Donnees.FrmMDI;
             this.leForm.Show();
-
-
         }
 
         private void initCDI()
@@ -133,6 +131,12 @@ namespace Exo9
                 {
                     // ajouter la référence de l'objet MStagiaire créé par le ctrleur dans la collection des stagiaires de la section
                     this.laSection.Ajouter(ctrlNouveau.LeStagiaire);
+
+
+                    // mettre à jour la BDD // instancier l'Entity correspondante et l'ajouter au dbSet // et mettre à jour la BDD à l'aide du dbcontext
+                    MStagiaireDAOEFStatic.InsererStagiaire(ctrlNouveau.LeStagiaire, this.laSection);
+
+
                 }
                 // gestion des erreurs en MAJ de la collection des MStagiaire de la section
                 catch (Exception ex)

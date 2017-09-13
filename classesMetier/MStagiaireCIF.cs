@@ -19,6 +19,11 @@ namespace Exo9
         //    this.TypeCif = "";
         //}
 
+        public MStagiaireCIF()
+        {
+
+        }
+
         /// <summary>
         /// constructeur d'initialisation
         /// (appelle le constructeur d'initialisation de la classe de base)
@@ -38,6 +43,16 @@ namespace Exo9
             this.Fongecif = unFongecif;
             this.TypeCif = unTypeCIF;
         }
+
+
+        //public MStagiaireCIF(Int32 unNumosia, String unNom, String unPrenom, String uneRue, String uneVille, String UnCodePostal,
+        //    String unFongecif, String unTypeCIF)
+        //{
+
+        //}
+
+
+
         /// <summary>
         /// nom Fongecif
         /// </summary>

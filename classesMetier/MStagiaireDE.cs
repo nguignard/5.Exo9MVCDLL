@@ -20,6 +20,12 @@ namespace Exo9
         //}
 
 
+
+        public MStagiaireDE()
+        {
+
+        }
+
         /// <summary>
         /// constructeur d'initialisation
         /// (appelle le constructeur d'initialisation de la classe de base)
@@ -32,6 +38,10 @@ namespace Exo9
         /// <param name="UnCodePostal">Code Postal</param>
         /// <param name="unRemuAfpa">Rémunaration par l'Afpa</param>
         public MStagiaireDE(Int32 unNumosia, String unNom, String unPrenom, String uneRue, String uneVille, String UnCodePostal,
+
+   
+            
+            
             Boolean unRemuAfpa)
             : base( unNumosia,  unNom,  unPrenom,  uneRue,  uneVille,  UnCodePostal)
         {
